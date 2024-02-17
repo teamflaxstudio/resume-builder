@@ -1,0 +1,60 @@
+.editor {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+}
+
+.editor .editor-input-area{
+    padding: 3rem 1rem;
+    max-width: 750px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.editor .editor-input-area .col-2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.editor .editor-input-area .input-holder{
+    margin-bottom: 0;
+}
+
+.editor .input-group {
+    margin-bottom: 3rem;
+}
+
+.editor .input-group h3{
+    margin: 0.5em 0;
+}
+
+.editor .editor-input-area  p{
+    color: var(--color-on-surface-variant-light);
+}
+
+.editor .additional-details{
+    margin-top: 1.5rem;
+}
+
+.editor .additional-details span{
+    margin: 1em 0;
+    display: block;
+    color: var(--color-primary);
+    cursor: pointer;
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+}
+
+.editor .additional-details span svg{
+    width: var(--medium-font);
+    height: auto;
+    fill: var(--color-primary);
+    transform: rotateZ(-90deg) translateX(0.1em);
+    transition: all 200ms;
+}
+
+.editor .additional-details span svg.active{
+    transform: rotateZ(90deg) translateX(0.2em);
+}

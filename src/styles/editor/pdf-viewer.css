@@ -1,0 +1,19 @@
+
+.pdf-viewer .canvas-holder{
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.pdf-viewer .pager{
+    display: flex;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    color: var(--pdf-editor-on-bg);
+}
+
+.pdf-viewer .pager button{
+    fill: var(--pdf-editor-on-bg-light);
+}
