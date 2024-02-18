@@ -17,6 +17,10 @@
     gap: 1.5rem;
 }
 
+.editor .editor-input-area .col-2.align-bottom{
+    align-items: end;
+}
+
 .editor .editor-input-area .col-1{
     margin-top: 1.5rem;
     display: flex;
@@ -26,6 +30,10 @@
 
 .editor .editor-input-area .input-holder {
     margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
 
@@ -71,4 +79,11 @@
 
 .editor .additional-details span svg.active {
     transform: rotateZ(90deg) translateX(0.2em);
+}
+
+.editor .switch-x{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin: 1em 0;
 }

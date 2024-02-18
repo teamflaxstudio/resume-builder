@@ -96,7 +96,7 @@ input,
 textarea,
 label {
   font-size: var(--medium-font);
-  color: var(--color-on-surface-variant);
+  color: var(--color-on-surface-variant-light);
   line-height: 1.5em;
 }
 

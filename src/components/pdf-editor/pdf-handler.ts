@@ -77,7 +77,7 @@ export interface ResumeLink {
 
 export interface CommonField {
   title: string;
-  value: string;
+  level: number;
 }
 export interface Skill extends CommonField {}
 export interface Language extends CommonField {}

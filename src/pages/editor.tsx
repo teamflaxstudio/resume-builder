@@ -23,6 +23,7 @@ import ProfessionalSummaryForm from "@/components/editor/ProfessionalSummary";
 import EmploymentHistoryForm from "@/components/editor/EmpolymentHistoryForm";
 import ProjectLinkForm from "@/components/editor/ProjectLinkForm";
 import SocialLinkForm from "@/components/editor/SocialLinkForm";
+import SkillsForm from "@/components/editor/SkillForm";
 
 export type ResumeState = {
   resumeData: ResumeProfile;
@@ -90,6 +91,7 @@ export default function Editor() {
           <EducationForm />
           <EmploymentHistoryForm />
           <SocialLinkForm/>
+          <SkillsForm/>
 
 
           {/* optional */}

@@ -1,0 +1,65 @@
+.range-slider {
+    --range-slider-height: 32px;
+    --range-slider-thumb-size: 24px;
+    width: 100%;
+    height: var(--range-slider-height);
+    background-color: var(--color-surface-variant-dark);
+    /* margin: 0.5em 0; */
+    position: relative;
+    border-radius: 50px;
+}
+
+.range-slider .dots-layer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    padding: calc(var(--range-slider-height) / 2);
+}
+
+.range-slider .dots-layer span {
+    width: 6px;
+    height: 6px;
+    background-color: rgb(189, 189, 189);   
+    border-radius: 50%;
+}
+
+.range-slider input {
+    /* width: 100%; */
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: calc(var(--range-slider-height) / 2.8);
+    right: calc(var(--range-slider-height) / 2.8);
+    opacity: 0.001;
+    z-index: 2;
+}
+
+.range-slider .progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--range-slider-height);
+    background-color: var(--color-primary);
+    border-radius: var(--range-slider-height);
+    transition: 0.2s all ease-in-out;
+    z-index: 1;
+}
+
+.range-slider .progress::after {
+    content: "";
+    position: absolute;
+    background-color: var(--color-on-primary);
+    height: var(--range-slider-thumb-size);
+    width: var(--range-slider-thumb-size);
+    right: calc((var(--range-slider-height) - var(--range-slider-thumb-size)) /2);
+    transform: translateY(-50%);
+    top: 50%;
+    border-radius: 50%;
+}
+
+.range-slider input:hover~.progress {
+    background-color: var(--color-primary-variant);
+}
