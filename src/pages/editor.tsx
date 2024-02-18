@@ -24,6 +24,7 @@ import EmploymentHistoryForm from "@/components/editor/EmpolymentHistoryForm";
 import ProjectLinkForm from "@/components/editor/ProjectLinkForm";
 import SocialLinkForm from "@/components/editor/SocialLinkForm";
 import SkillsForm from "@/components/editor/SkillForm";
+import OtherForm from "@/components/editor/OtherForm";
 
 export type ResumeState = {
   resumeData: ResumeProfile;
@@ -90,12 +91,9 @@ export default function Editor() {
           <ProfessionalSummaryForm />
           <EducationForm />
           <EmploymentHistoryForm />
-          <SocialLinkForm/>
-          <SkillsForm/>
-
-
-          {/* optional */}
-          <ProjectLinkForm/>
+          <SocialLinkForm />
+          <SkillsForm />
+          <OtherForm />
         </div>
       </ResumeDataContext.Provider>
 

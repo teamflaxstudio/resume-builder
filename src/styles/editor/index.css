@@ -17,16 +17,16 @@
     gap: 1.5rem;
 }
 
-.editor .editor-input-area .col-2.align-bottom{
+.editor .editor-input-area .col-2.align-bottom {
     align-items: end;
 }
 
-.editor .editor-input-area .col-1{
+.editor .editor-input-area .col-1 {
     margin-top: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-} 
+}
 
 .editor .editor-input-area .input-holder {
     margin-bottom: 0;
@@ -37,7 +37,7 @@
 }
 
 
-.editor .draggable-form{
+.editor .draggable-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -81,9 +81,37 @@
     transform: rotateZ(90deg) translateX(0.2em);
 }
 
-.editor .switch-x{
+.editor .switch-x {
     display: flex;
     align-items: center;
     gap: 1em;
     margin: 1em 0;
 }
+
+.editor .other-section>div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.editor .other-section button{
+    color: var(--color-on-surface-variant-light);
+    margin: 0;
+    background-color: var(--color-surface-variant);
+    height: 3.5em;
+    font-weight: 600;
+    fill: var(--color-on-surface-variant-light);
+
+}
+
+.editor .other-section button svg{
+    width: calc(var(--medium-font) * 1.5) !important;
+    fill: inherit;
+}
+
+.editor .other-section button:hover{
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    fill: var(--color-on-primary);
+}
+

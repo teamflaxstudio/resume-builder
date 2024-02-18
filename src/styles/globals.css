@@ -193,7 +193,6 @@ button.primary {
 
 button.primary:hover {
   background-color: var(--color-primary-variant);
-  box-shadow: 0 4px 8px #148aff4d;
 }
 
 button.secondary {
@@ -204,7 +203,6 @@ button.secondary {
 
 button.secondary:hover {
   background-color: var(--color-secondary-variant);
-  box-shadow: 0 4px 8px #ff17a638;
 }
 
 button.btn a {

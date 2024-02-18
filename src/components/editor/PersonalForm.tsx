@@ -82,18 +82,20 @@ export default function PersonalForm() {
           value={resumeData.phone}
           onChange={onPhoneChange}
         />
-        <InputField
-          title="City"
-          placeholder="e.g Surat"
-          value={resumeData.city}
-          onChange={onCityChange}
-        />
-        <InputField
-          title="Country"
-          placeholder="e.g India"
-          value={resumeData.country}
-          onChange={onCountryChange}
-        />
+        <div className="col-2">
+          <InputField
+            title="City"
+            placeholder="e.g Surat"
+            value={resumeData.city}
+            onChange={onCityChange}
+          />
+          <InputField
+            title="Country"
+            placeholder="e.g India"
+            value={resumeData.country}
+            onChange={onCountryChange}
+          />
+        </div>
       </div>
       <div className="additional-details">
         {showAdditional && (
