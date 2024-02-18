@@ -29,10 +29,6 @@ export default function EducationForm() {
     setResumeData({ ...resumeData, education: newEdu });
   }
 
-
-
-
-
   // -------------------  Education Form Update -------------------  //
 
   function onSchoolChange(index: number, value: string) {
@@ -174,7 +170,7 @@ export default function EducationForm() {
       </div>
 
       <button onClick={onAdd} className="btn plain">
-        <AddIcon /> Add more eduction
+        <AddIcon /> Add more education
       </button>
     </div>
   );

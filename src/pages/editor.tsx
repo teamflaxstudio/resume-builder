@@ -18,6 +18,7 @@ import { ArrowHeadLeft } from "@/components/icons";
 import QuillEditor from "@/components/widgets/QuillEditor";
 import DraggableFormChild from "@/components/widgets/DraggableFormChild";
 import EducationForm from "@/components/editor/EducationForm";
+import PersonalForm from "@/components/editor/PersonalForm";
 
 export type ResumeState = {
   resumeData: ResumeProfile;
@@ -82,44 +83,13 @@ export default function Editor() {
     certificates: [],
   });
 
-  const [showAdditional, setShowAdditional] = useState(false);
+  
 
   return (
     <main className="editor">
       <ResumeDataContext.Provider value={{ resumeData, setResumeData }}>
         <div className="editor-input-area">
-          <div className="input-group">
-            <h3>Personal Details</h3>
-            <p>Enter your personal details to complete your form.</p>
-            <div className="col-2">
-              <InputField
-                title="Job Title"
-                placeholder="e.g Software Developer"
-              />
-              <InputField title="First Name" placeholder="e.g Robert" />
-              <InputField title="Last Name" placeholder="e.g Tony" />
-              <InputField title="Email" placeholder="e.g example@gmail.com" />
-              <InputField title="Phone" placeholder="e.g +911000000005" />
-              <InputField title="City" placeholder="e.g Surat" />
-              <InputField title="Country" placeholder="e.g India" />
-            </div>
-            <div className="additional-details">
-              {showAdditional && (
-                <div className="col-2">
-                  <InputField title="State" placeholder="e.g Gujarat" />
-                  <InputField title="Postal Code" placeholder="e.g 844114" />
-                  <InputField
-                    title="Address"
-                    placeholder="e.g 456 Park Avenue, India"
-                  />
-                </div>
-              )}
-              <span onClick={() => setShowAdditional(!showAdditional)}>
-                {showAdditional ? "Hide" : "Show"} additional details
-                <ArrowHeadLeft className={showAdditional ? "active" : ""} />
-              </span>
-            </div>
-          </div>
+          <PersonalForm/>
 
           <div className="input-group">
             <h3>Professional Summary</h3>
