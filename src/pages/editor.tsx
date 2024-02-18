@@ -19,6 +19,7 @@ import QuillEditor from "@/components/widgets/QuillEditor";
 import DraggableFormChild from "@/components/widgets/DraggableFormChild";
 import EducationForm from "@/components/editor/EducationForm";
 import PersonalForm from "@/components/editor/PersonalForm";
+import ProfessionalSummary from "@/components/editor/ProfessionalSummary";
 
 export type ResumeState = {
   resumeData: ResumeProfile;
@@ -90,21 +91,7 @@ export default function Editor() {
       <ResumeDataContext.Provider value={{ resumeData, setResumeData }}>
         <div className="editor-input-area">
           <PersonalForm/>
-
-          <div className="input-group">
-            <h3>Professional Summary</h3>
-            <p>
-              Write 2-4 short & energetic sentences to interest the reader!
-              Mention your role, experience & most importantly - your biggest
-              achievements, best qualities and skills
-            </p>
-
-            <InputField
-              type="textarea"
-              placeholder="e.g. Experienced software engineer proficient in developing scalable applications. Skilled in multiple programming languages and frameworks, with 6+ years of hands-on experience."
-            />
-          </div>
-
+          <ProfessionalSummary/>
           <EducationForm />
         </div>
       </ResumeDataContext.Provider>
