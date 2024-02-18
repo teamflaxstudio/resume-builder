@@ -1,7 +1,11 @@
 import React, { useEffect, createElement, useRef, useState } from "react";
 import logo from "@/assets/img/favicon.ico";
 import PDFEditor from "@/components/pdf-editor";
-import { PDFProps, ResumeProfile } from "@/components/pdf-editor/pdf-handler";
+import {
+  Education,
+  PDFProps,
+  ResumeProfile,
+} from "@/components/pdf-editor/pdf-handler";
 import "@/styles/editor/index.css";
 import InputField from "@/components/widgets/InputField";
 import { ArrowHeadLeft } from "@/components/icons";
@@ -43,6 +47,25 @@ export default function Editor() {
   });
 
   const [showAdditional, setShowAdditional] = useState(false);
+
+  function onAddEducation() {
+    const newEdu: Education = {
+      degree: "",
+      school: "",
+      description: "",
+      endDate: "",
+      startDate: "",
+      field: "",
+      isStudying: false,
+    };
+    setData({ ...data, education: [...data.education, newEdu] });
+  }
+
+  function onRemoveEducation(index: number) {
+    const newEdu = data.education.filter((_, i) => i !== index);
+    setData({ ...data, education: newEdu });
+  }
+
   return (
     <main className="editor">
       <div className="editor-input-area">
@@ -93,7 +116,11 @@ export default function Editor() {
           />
         </div>
 
-        <EducationForm data={data.education} />
+        <EducationForm
+          data={data.education}
+          onAdd={onAddEducation}
+          onRemove={onRemoveEducation}
+        />
       </div>
       <PDFEditor pdfData={data} />
     </main>

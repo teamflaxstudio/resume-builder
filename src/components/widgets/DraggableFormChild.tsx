@@ -5,11 +5,17 @@ import "@/styles/widgets/draggable-form-child.css";
 export default function DraggableFormChild({
   title,
   children,
+  onRemove,
 }: {
   title: string;
   children: React.ReactNode;
+  onRemove?: () => void;
 }) {
   const [isOpen, setIsOpen] = React.useState(true);
+
+  function onRemoveChild() {
+    if (onRemove) onRemove();
+  }
   return (
     <div className="draggable-child">
       <div className="draggable-header" onClick={() => setIsOpen(!isOpen)}>
@@ -19,7 +25,9 @@ export default function DraggableFormChild({
         </div>
         <div>
           <ArrowHeadLeft className={isOpen ? "arrow active" : "arrow"} />
-          <DeleteIcon className="delete" />
+          <div onClick={onRemoveChild}>
+            <DeleteIcon className="delete" />
+          </div>
         </div>
       </div>
       <div className={isOpen ? "draggable-body" : "draggable-body hide"}>

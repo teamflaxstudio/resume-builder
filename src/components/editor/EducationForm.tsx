@@ -4,7 +4,15 @@ import DraggableFormChild from "../widgets/DraggableFormChild";
 import InputField from "../widgets/InputField";
 import { AddIcon } from "../icons";
 
-export default function EducationForm({ data }: { data: Array<Education> }) {
+export default function EducationForm({
+  data,
+  onAdd,
+  onRemove,
+}: {
+  data: Array<Education>;
+  onAdd: () => void;
+  onRemove: (index: number) => void;
+}) {
   return (
     <div className="input-group">
       <h3>Education</h3>
@@ -15,7 +23,13 @@ export default function EducationForm({ data }: { data: Array<Education> }) {
 
       <div className="draggable-form">
         {data.map((edu, index) => (
-          <DraggableFormChild key={index} title="Education">
+          <DraggableFormChild
+            key={index}
+            title="Education"
+            onRemove={() => {
+              onRemove(index);
+            }}
+          >
             <div className="col-2">
               <InputField
                 title="School"
@@ -48,7 +62,9 @@ export default function EducationForm({ data }: { data: Array<Education> }) {
         ))}
       </div>
 
-      <button className="btn plain"><AddIcon/> Add more eduction</button>
+      <button onClick={onAdd} className="btn plain">
+        <AddIcon /> Add more eduction
+      </button>
     </div>
   );
 }
