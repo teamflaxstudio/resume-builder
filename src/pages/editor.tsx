@@ -21,6 +21,8 @@ import EducationForm from "@/components/editor/EducationForm";
 import PersonalForm from "@/components/editor/PersonalForm";
 import ProfessionalSummaryForm from "@/components/editor/ProfessionalSummary";
 import EmploymentHistoryForm from "@/components/editor/EmpolymentHistoryForm";
+import ProjectLinkForm from "@/components/editor/ProjectLinkForm";
+import SocialLinkForm from "@/components/editor/SocialLinkForm";
 
 export type ResumeState = {
   resumeData: ResumeProfile;
@@ -48,6 +50,8 @@ export const ResumeDataContext = createContext<ResumeState>({
     hobby: "",
     references: [],
     certificates: [],
+    projectLinks: [],
+    socialLinks: [],
   },
   setResumeData: () => {},
 });
@@ -73,18 +77,23 @@ export default function Editor() {
     hobby: "",
     references: [],
     certificates: [],
+    socialLinks: [],
+    projectLinks: [],
   });
-
-  
 
   return (
     <main className="editor">
       <ResumeDataContext.Provider value={{ resumeData, setResumeData }}>
         <div className="editor-input-area">
-          <PersonalForm/>
-          <ProfessionalSummaryForm/>
+          <PersonalForm />
+          <ProfessionalSummaryForm />
           <EducationForm />
-          <EmploymentHistoryForm/>
+          <EmploymentHistoryForm />
+          <SocialLinkForm/>
+
+
+          {/* optional */}
+          <ProjectLinkForm/>
         </div>
       </ResumeDataContext.Provider>
 

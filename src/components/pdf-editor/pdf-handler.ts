@@ -32,6 +32,8 @@ export interface ResumeProfile {
   hobby: string;
   references: Reference[];
   certificates: Certificate[];
+  socialLinks: ResumeLink[];
+  projectLinks: ResumeLink[];
 }
 
 export interface Experience {
@@ -65,6 +67,11 @@ export interface Certificate {
   institute: string;
   certificateDate: string;
   description: string;
+  url: string;
+}
+
+export interface ResumeLink {
+  name: string;
   url: string;
 }
 

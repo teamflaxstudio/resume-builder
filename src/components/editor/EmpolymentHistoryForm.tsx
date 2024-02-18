@@ -173,7 +173,7 @@ export default function EmploymentHistoryForm() {
       </div>
 
       <button onClick={onAdd} className="btn plain">
-        <AddIcon /> Add more education
+        <AddIcon /> Add more employment
       </button>
     </div>
   );
