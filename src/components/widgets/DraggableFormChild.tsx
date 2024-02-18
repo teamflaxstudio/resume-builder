@@ -21,7 +21,7 @@ export default function DraggableFormChild({
       <div className="draggable-header" onClick={() => setIsOpen(!isOpen)}>
         <div>
           <DragIcon />
-          <span>Untitled</span>
+          <span>{title ? title : "Untitled"}</span>
         </div>
         <div>
           <ArrowHeadLeft className={isOpen ? "arrow active" : "arrow"} />
