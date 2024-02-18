@@ -1,0 +1,70 @@
+.draggable-child {
+    border: 1px solid var(--border-color);
+    /* padding: 1rem; */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.draggable-child .draggable-header {
+    height: 60px;
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    gap: 2em;
+    width: 100%;
+    padding: 0 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.draggable-child .draggable-header svg {
+    height: var(--medium-font);
+    width: auto;
+    fill: var(--color-on-surface);
+    cursor: pointer;
+}
+
+.draggable-child .draggable-header div {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+}
+
+.draggable-child .draggable-body {
+    overflow-y: hidden;
+    transition: all 200ms;
+    height: fit-content;
+}
+
+.draggable-child .draggable-body.hide {
+    height: 0;
+}
+
+
+.draggable-child .draggable-body>* {
+    padding: 0 1rem;
+}
+
+.draggable-child .draggable-body>:last-child {
+    padding-bottom: 1rem;
+
+}
+
+
+.draggable-header span {
+    display: block;
+    width: 100%;
+}
+
+.draggable-header svg.arrow {
+    transform: rotateZ(-90deg);
+    transition: all 200ms;
+}
+
+.draggable-header svg.arrow.active {
+    transform: rotateZ(90deg) translateX(0.2em);
+}
+
+.draggable-header svg.delete {
+    fill: var(--color-error);
+}

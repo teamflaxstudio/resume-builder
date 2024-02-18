@@ -8,7 +8,7 @@ export default function InputField({
   placeholder,
 }: {
   title?: string;
-  type?: "text" | "textarea" | "number" | "email" | "password";
+  type?: "text" | "date" | "textarea" | "number" | "email" | "password";
   value?: string;
   onChange?: (e: string) => void;
   placeholder?: string;

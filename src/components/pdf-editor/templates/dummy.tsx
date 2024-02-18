@@ -53,7 +53,7 @@ export default function Dummy(resume: ResumeProfile) {
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <View style={styles.logo}>
+          <View debug={true} style={styles.logo}>
             <Image style={styles.logo_img} src={profileIcon.src} />
           </View>
           <Text>

@@ -5,6 +5,9 @@ import { PDFProps, ResumeProfile } from "@/components/pdf-editor/pdf-handler";
 import "@/styles/editor/index.css";
 import InputField from "@/components/widgets/InputField";
 import { ArrowHeadLeft } from "@/components/icons";
+import QuillEditor from "@/components/widgets/QuillEditor";
+import DraggableFormChild from "@/components/widgets/DraggableFormChild";
+import EducationForm from "@/components/editor/EducationForm";
 
 export default function Editor() {
   const [data, setData] = useState<ResumeProfile>({
@@ -21,7 +24,17 @@ export default function Editor() {
     profilePic: "",
     summary: "",
     experience: [],
-    education: [],
+    education: [
+      {
+        degree: "",
+        school: "",
+        description: "",
+        endDate: "",
+        startDate: "",
+        field: "",
+        isStudying: false,
+      },
+    ],
     skills: [],
     languages: [],
     hobby: "",
@@ -74,10 +87,13 @@ export default function Editor() {
             achievements, best qualities and skills
           </p>
 
-          <InputField type="textarea" placeholder="e.g. Experienced software engineer proficient in developing scalable applications. Skilled in multiple programming languages and frameworks, with 6+ years of hands-on experience." />
-          
-      
+          <InputField
+            type="textarea"
+            placeholder="e.g. Experienced software engineer proficient in developing scalable applications. Skilled in multiple programming languages and frameworks, with 6+ years of hands-on experience."
+          />
         </div>
+
+        <EducationForm data={data.education} />
       </div>
       <PDFEditor pdfData={data} />
     </main>

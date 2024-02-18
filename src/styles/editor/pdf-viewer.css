@@ -1,10 +1,9 @@
-
-.pdf-viewer .canvas-holder{
+.pdf-viewer .canvas-holder {
     border-radius: var(--border-radius);
     overflow: hidden;
 }
 
-.pdf-viewer .pager{
+.pdf-viewer .pager {
     display: flex;
     height: 50px;
     display: flex;
@@ -14,6 +13,21 @@
     color: var(--pdf-editor-on-bg);
 }
 
-.pdf-viewer .pager button{
+.pdf-viewer .pager span {
+    color: var(--pdf-editor-on-bg);
+}
+
+.pdf-viewer .pager button {
     fill: var(--pdf-editor-on-bg-light);
+
+}
+
+.pdf-viewer .pager button:hover {
+    background-color: transparent !important;
+}
+
+.pdf-viewer .pager button svg {
+    fill: inherit !important;
+    height: var(--medium-font) !important;
+    width: auto;
 }
