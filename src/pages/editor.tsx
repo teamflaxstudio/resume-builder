@@ -19,7 +19,8 @@ import QuillEditor from "@/components/widgets/QuillEditor";
 import DraggableFormChild from "@/components/widgets/DraggableFormChild";
 import EducationForm from "@/components/editor/EducationForm";
 import PersonalForm from "@/components/editor/PersonalForm";
-import ProfessionalSummary from "@/components/editor/ProfessionalSummary";
+import ProfessionalSummaryForm from "@/components/editor/ProfessionalSummary";
+import EmploymentHistoryForm from "@/components/editor/EmpolymentHistoryForm";
 
 export type ResumeState = {
   resumeData: ResumeProfile;
@@ -66,17 +67,7 @@ export default function Editor() {
     profilePic: "",
     summary: "",
     experience: [],
-    education: [
-      {
-        degree: "",
-        school: "",
-        description: "",
-        endDate: "",
-        startDate: "",
-        field: "",
-        isStudying: false,
-      },
-    ],
+    education: [],
     skills: [],
     languages: [],
     hobby: "",
@@ -91,8 +82,9 @@ export default function Editor() {
       <ResumeDataContext.Provider value={{ resumeData, setResumeData }}>
         <div className="editor-input-area">
           <PersonalForm/>
-          <ProfessionalSummary/>
+          <ProfessionalSummaryForm/>
           <EducationForm />
+          <EmploymentHistoryForm/>
         </div>
       </ResumeDataContext.Provider>
 

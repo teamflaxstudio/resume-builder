@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import InputField from "../widgets/InputField";
 import { ResumeDataContext } from "@/pages/editor";
 
-export default function ProfessionalSummary() {
+export default function ProfessionalSummaryForm() {
   const { resumeData, setResumeData } = useContext(ResumeDataContext);
 
   function onSummaryChange(value: string) {
