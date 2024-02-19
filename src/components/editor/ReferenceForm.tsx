@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import InputField from "../widgets/InputField";
 import { ResumeDataContext } from "@/pages/editor";
-import { AddIcon } from "../icons";
+import { AddIcon, DeleteIcon } from "../icons";
 import DraggableFormChild from "../widgets/DraggableFormChild";
 import { Reference, ResumeLink } from "../pdf-editor/pdf-handler";
 
-export default function ReferenceForm() {
+export default function ReferenceForm({ onClose }: { onClose: () => void }) {
   const { resumeData, setResumeData } = useContext(ResumeDataContext);
   function onAdd() {
     const refer: Reference = {
@@ -80,7 +80,13 @@ export default function ReferenceForm() {
 
   return (
     <div className="input-group">
-      <h3>References</h3>
+      <div className="removable">
+        <h3>References</h3>
+        <button onClick={onClose} className="btn icon-btn">
+          <DeleteIcon />
+        </button>
+      </div>
+
       <p>Add at least 3 - 4 project links to showcase your work.</p>
 
       <div className="draggable-form">

@@ -88,3 +88,17 @@
     margin: 1em 0;
 }
 
+
+.editor .removable{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.editor .removable button {
+
+    height: 2em;
+    width: 2em;
+    background-color: var(--color-error-light);
+}
+

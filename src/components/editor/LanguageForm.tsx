@@ -8,9 +8,9 @@ import DraggableFormChild from "../widgets/DraggableFormChild";
 import { Skill } from "../pdf-editor/pdf-handler";
 import RangeSliderInputField from "../widgets/RangeSliderInput";
 import { levelToLevelString } from "@/lib/utils";
-import { AddIcon } from "../icons";
+import { AddIcon, DeleteIcon } from "../icons";
 
-export default function LanguageForm() {
+export default function LanguageForm({ onClose }: { onClose: () => void }) {
   const { resumeData, setResumeData } = useContext(ResumeDataContext);
   const [isShowExperience, setIsShowExperience] = useState<boolean>(true);
 
@@ -50,7 +50,12 @@ export default function LanguageForm() {
 
   return (
     <div className="input-group">
-      <h3>Languages</h3>
+      <div className="removable">
+        <h3>Languages</h3>
+        <button onClick={onClose} className="btn icon-btn">
+          <DeleteIcon />
+        </button>
+      </div>
       <p>Add 1 - 2 languages you are proficient in.</p>
       {resumeData.languages.length > 0 && (
         <div className="switch-x">

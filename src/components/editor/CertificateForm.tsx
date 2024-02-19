@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import InputField from "../widgets/InputField";
 import { ResumeDataContext } from "@/pages/editor";
-import { AddIcon } from "../icons";
+import { AddIcon, DeleteIcon } from "../icons";
 import DraggableFormChild from "../widgets/DraggableFormChild";
 import { Certificate, ResumeLink } from "../pdf-editor/pdf-handler";
 
-export default function CertificateForm() {
+export default function CertificateForm({ onClose }: { onClose: () => void }) {
   const { resumeData, setResumeData } = useContext(ResumeDataContext);
   function onAdd() {
     const cert: Certificate = {
@@ -80,7 +80,12 @@ export default function CertificateForm() {
 
   return (
     <div className="input-group">
-      <h3>Certificates</h3>
+      <div className="removable">
+        <h3>Certificates</h3>
+        <button onClick={onClose} className="btn icon-btn">
+          <DeleteIcon />
+        </button>
+      </div>
       <p>Explain how you got your certificates.</p>
 
       <div className="draggable-form">

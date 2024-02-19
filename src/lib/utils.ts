@@ -1,4 +1,4 @@
-export const skills = [
+const skills = [
   "Java",
   "Python",
   "C++",
@@ -39,6 +39,21 @@ export const skills = [
   "Velocity",
   "JSTL",
 ];
+
+export function getRandomSkills(count: number) {
+  const result: string[] = [];
+  while (result.length < count) {
+    const index = Math.floor(Math.random() * skills.length);
+
+    // check if the skill is already in the result
+    if (result.includes(skills[index])) {
+      continue;
+    }
+    result.push(skills[index]);
+  }
+
+  return result;
+}
 
 export function levelToLevelString(level: number) {
   switch (level) {

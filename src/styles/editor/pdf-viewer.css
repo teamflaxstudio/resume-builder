@@ -19,6 +19,7 @@
 
 .pdf-viewer .pager button {
     fill: var(--pdf-editor-on-bg-light);
+    background-color: transparent;
 
 }
 

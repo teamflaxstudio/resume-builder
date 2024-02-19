@@ -45,7 +45,8 @@ html {
   --color-on-surface-variant: #333;
   --color-on-surface-variant-light: #706d7c;
   --color-success: #2ec278;
-  --color-error: #ff1744;
+  --color-error: #ca2a4a;
+  --color-error-light: #e75e79;
   --color-warning: #ff8c00;
 
   --pdf-editor-bg: #656e83;
@@ -156,17 +157,20 @@ button.icon-btn {
 }
 
 button.btn.plain {
-  background-color: transparent;
+  background-color: var(--color-primary-light);
   color: var(--color-primary);
+  fill: var(--color-primary);
 }
 
 button.btn.plain:hover {
-  background-color: var(--color-primary-light);
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  fill: var(--color-on-primary);
 }
 
 
 button.btn.plain svg {
-  fill: var(--color-primary);
+  fill: inherit !important;
 }
 
 

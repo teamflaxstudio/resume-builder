@@ -7,13 +7,17 @@ import RangeSlider from "../widgets/RangeSlider";
 import DraggableFormChild from "../widgets/DraggableFormChild";
 import { Skill } from "../pdf-editor/pdf-handler";
 import RangeSliderInputField from "../widgets/RangeSliderInput";
-import { levelToLevelString, skills } from "@/lib/utils";
+import { levelToLevelString, getRandomSkills } from "@/lib/utils";
 import { AddIcon } from "../icons";
 
 export default function SkillsForm() {
   const { resumeData, setResumeData } = useContext(ResumeDataContext);
-  const [chipData, setChipData] = useState<string[]>(skills);
+  const [chipData, setChipData] = useState<string[]>([]);
   const [isShowExperience, setIsShowExperience] = useState<boolean>(true);
+
+  useEffect(() => {
+    setChipData(getRandomSkills(10));
+  }, []);
 
   function onAdd(title: string = "", level: number = 0) {
     const skill: Skill = {
