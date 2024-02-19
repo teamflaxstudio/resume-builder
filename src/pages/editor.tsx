@@ -25,6 +25,7 @@ import ProjectLinkForm from "@/components/editor/ProjectLinkForm";
 import SocialLinkForm from "@/components/editor/SocialLinkForm";
 import SkillsForm from "@/components/editor/SkillForm";
 import OtherForm from "@/components/editor/OtherForm";
+import { loadResumeData, saveResumeData } from "@/lib/local-storage-manager";
 
 export type ResumeState = {
   resumeData: ResumeProfile;
@@ -82,6 +83,33 @@ export default function Editor() {
     socialLinks: [],
     projectLinks: [],
   });
+
+  const cachedResumeData = useRef<ResumeProfile>();
+  const isResumeModified = useRef(false);
+
+  useEffect(() => {
+    setResumeData(loadResumeData());
+
+    const intervalId = setInterval(autoSave, 1000);
+
+    // remove the interval on unmount
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
+  useEffect(() => {
+    cachedResumeData.current = resumeData;
+    isResumeModified.current = true;
+  }, [resumeData]);
+
+  // save resume data on interval
+  function autoSave() {
+    if (isResumeModified.current == false || !cachedResumeData.current) return;
+    isResumeModified.current = false;
+    console.log("auto saving");
+    saveResumeData(cachedResumeData.current);
+  }
 
   return (
     <main className="editor">
