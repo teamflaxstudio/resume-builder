@@ -7,12 +7,11 @@ import RangeSlider from "../widgets/RangeSlider";
 import DraggableFormChild from "../widgets/DraggableFormChild";
 import { Skill } from "../pdf-editor/pdf-handler";
 import RangeSliderInputField from "../widgets/RangeSliderInput";
-import { levelToLevelString, skills } from "@/lib/utils";
+import { levelToLevelString } from "@/lib/utils";
 import { AddIcon } from "../icons";
 
-export default function SkillsForm() {
+export default function LanguageForm() {
   const { resumeData, setResumeData } = useContext(ResumeDataContext);
-  const [chipData, setChipData] = useState<string[]>(skills);
   const [isShowExperience, setIsShowExperience] = useState<boolean>(true);
 
   function onAdd(title: string = "", level: number = 0) {
@@ -22,51 +21,38 @@ export default function SkillsForm() {
     };
 
     // check if skill already exists
-    if (resumeData.skills.some((s) => s.title === title)) return;
+    if (resumeData.languages.some((s) => s.title === title)) return;
     setResumeData({
       ...resumeData,
-      skills: [...resumeData.skills, skill],
+      languages: [...resumeData.languages, skill],
     });
   }
 
   function onRemove(name: string) {
-    const skills = resumeData.skills.filter((old, i) => old.title !== name);
-    setResumeData({ ...resumeData, skills });
+    const languages = resumeData.languages.filter(
+      (old, i) => old.title !== name
+    );
+    setResumeData({ ...resumeData, languages });
   }
 
   function onTitleChange(index: number, value: string) {
-    const skills = resumeData.skills.map((skill, i) =>
+    const languages = resumeData.languages.map((skill, i) =>
       i === index ? { ...skill, title: value } : skill
     );
-    setResumeData({ ...resumeData, skills });
+    setResumeData({ ...resumeData, languages });
   }
   function onLevelChange(index: number, value: number) {
-    const skills = resumeData.skills.map((skill, i) =>
+    const languages = resumeData.languages.map((skill, i) =>
       i === index ? { ...skill, level: value } : skill
     );
-    setResumeData({ ...resumeData, skills });
+    setResumeData({ ...resumeData, languages });
   }
 
-  function onChipToggle(name: string) {
-    if (!chipData.includes(name)) return;
-
-    // remove chip if it exists otherwise add it
-    if (resumeData.skills.some((item) => item.title === name)) {
-      onRemove(name);
-    } else {
-      onAdd(name);
-    }
-  }
   return (
     <div className="input-group">
-      <h3>Skills</h3>
-      <p>
-        Choose 5 important skills that show you fit the position. Make sure they
-        match the key skills mentioned in the job listing (especially when
-        applying via an online system).
-      </p>
-
-      {resumeData.skills.length > 0 && (
+      <h3>Languages</h3>
+      <p>Add 1 - 2 languages you are proficient in.</p>
+      {resumeData.languages.length > 0 && (
         <div className="switch-x">
           <Switch
             isOn={isShowExperience}
@@ -76,14 +62,8 @@ export default function SkillsForm() {
         </div>
       )}
 
-      <Chips
-        data={chipData}
-        selected={resumeData.skills.map((item) => item.title)}
-        onToggle={onChipToggle}
-      />
-      <br />
       <div className="draggable-form">
-        {resumeData.skills.map((skill, index) => (
+        {resumeData.languages.map((skill, index) => (
           <DraggableFormChild
             key={index}
             title={skill.title}
@@ -93,9 +73,9 @@ export default function SkillsForm() {
           >
             <div className="col-2 align-bottom">
               <InputField
-                title="Skill"
+                title="Name"
                 type="text"
-                placeholder="e.g. Javascript"
+                placeholder="e.g. English"
                 value={skill.title}
                 onChange={(e) => {
                   onTitleChange(index, e);
@@ -117,7 +97,7 @@ export default function SkillsForm() {
         ))}
       </div>
       <button onClick={() => onAdd()} className="btn plain">
-        <AddIcon /> Add custom skill
+        <AddIcon /> Add more language
       </button>
     </div>
   );

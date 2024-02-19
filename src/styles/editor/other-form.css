@@ -1,0 +1,43 @@
+.editor .other-section{
+    margin-top: 100px;
+}
+
+.editor .other-section>h3{
+    color: var(--color-primary);
+}
+.editor .other-section .button-holder {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.editor .other-section .button-holder button {
+    color: var(--color-on-surface-variant-light);
+    margin: 0;
+    background-color: var(--color-surface-variant);
+    height: 3.5em;
+    font-weight: 600;
+    fill: var(--color-on-surface-variant-light);
+
+}
+
+.editor .other-section .button-holder button svg {
+    width: calc(var(--medium-font) * 1.5) !important;
+    fill: inherit;
+}
+
+.editor .other-section .button-holder button:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.editor .other-section .button-holder button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    fill: var(--color-on-primary);
+}
+
+
+.other-section .draggable-section{
+    margin: 4rem 0;
+}
