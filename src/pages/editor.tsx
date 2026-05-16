@@ -1,131 +1,53 @@
-import React, {
-  useEffect,
-  createElement,
-  useRef,
-  useState,
-  createContext,
-} from "react";
-import logo from "@/assets/img/favicon.ico";
 import PDFEditor from "@/components/pdf-editor";
-import {
-  Education,
-  PDFProps,
-  ResumeProfile,
-} from "@/components/pdf-editor/pdf-handler";
-import "@/styles/editor/index.css";
-import InputField from "@/components/widgets/InputField";
-import { ArrowHeadLeft } from "@/components/icons";
-import QuillEditor from "@/components/widgets/QuillEditor";
-import DraggableFormChild from "@/components/widgets/DraggableFormChild";
-import EducationForm from "@/components/editor/EducationForm";
-import PersonalForm from "@/components/editor/PersonalForm";
-import ProfessionalSummaryForm from "@/components/editor/ProfessionalSummary";
-import EmploymentHistoryForm from "@/components/editor/EmpolymentHistoryForm";
-import ProjectLinkForm from "@/components/editor/ProjectLinkForm";
-import SocialLinkForm from "@/components/editor/SocialLinkForm";
-import SkillsForm from "@/components/editor/SkillForm";
-import OtherForm from "@/components/editor/OtherForm";
-import { loadResumeData, saveResumeData } from "@/lib/local-storage-manager";
+import { AppShell } from "@/components/layout/AppShell";
+import { ResumeEditor } from "@/components/resume/ResumeEditor";
+import { TemplateGallery } from "@/components/resume/TemplateGallery";
+import { useResume } from "@/components/resume/ResumeContext";
+import { ResumeStats } from "@/components/resume/ResumeStats";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-export type ResumeState = {
-  resumeData: ResumeProfile;
-  setResumeData: React.Dispatch<React.SetStateAction<ResumeProfile>>;
-};
-
-export const ResumeDataContext = createContext<ResumeState>({
-  resumeData: {
-    jobTitle: "",
-    first: "",
-    last: "",
-    email: "",
-    phone: "",
-    address: "",
-    city: "",
-    zipCode: "",
-    state: "",
-    country: "",
-    profilePic: "",
-    summary: "",
-    experience: [],
-    education: [],
-    skills: [],
-    languages: [],
-    hobby: "",
-    references: [],
-    certificates: [],
-    projectLinks: [],
-    socialLinks: [],
-  },
-  setResumeData: () => {},
-});
+export { ResumeDataContext } from "@/components/resume/ResumeContext";
 
 export default function Editor() {
-  const [resumeData, setResumeData] = useState<ResumeProfile>({
-    jobTitle: "",
-    first: "",
-    last: "",
-    email: "",
-    phone: "",
-    address: "",
-    city: "",
-    state: "",
-    zipCode: "",
-    country: "",
-    profilePic: "",
-    summary: "",
-    experience: [],
-    education: [],
-    skills: [],
-    languages: [],
-    hobby: "",
-    references: [],
-    certificates: [],
-    socialLinks: [],
-    projectLinks: [],
-  });
-
-  const cachedResumeData = useRef<ResumeProfile>();
-  const isResumeModified = useRef(false);
-
-  useEffect(() => {
-    setResumeData(loadResumeData());
-
-    const intervalId = setInterval(autoSave, 1000);
-
-    // remove the interval on unmount
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
-
-  useEffect(() => {
-    cachedResumeData.current = resumeData;
-    isResumeModified.current = true;
-  }, [resumeData]);
-
-  // save resume data on interval
-  function autoSave() {
-    if (isResumeModified.current == false || !cachedResumeData.current) return;
-    isResumeModified.current = false;
-    console.log("auto saving");
-    saveResumeData(cachedResumeData.current);
-  }
+  const { resumeData, selectedTemplate, setSelectedTemplate } = useResume();
 
   return (
-    <main className="editor">
-      <ResumeDataContext.Provider value={{ resumeData, setResumeData }}>
-        <div className="editor-input-area">
-          <PersonalForm />
-          <ProfessionalSummaryForm />
-          <EducationForm />
-          <EmploymentHistoryForm />
-          <SocialLinkForm />
-          <SkillsForm />
-          <OtherForm />
-        </div>
-      </ResumeDataContext.Provider>
-
-      <PDFEditor pdfData={resumeData} />
-    </main>
+    <AppShell>
+      <div className="grid min-h-screen gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(420px,46vw)] lg:px-8">
+        <section className="min-w-0">
+          <div className="mb-6 rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="flex flex-col justify-between gap-4 xl:flex-row xl:items-center">
+              <div>
+                <p className="mb-2 text-sm font-medium text-blue-700">Resume Builder Editor</p>
+                <h1 className="m-0 text-3xl font-bold tracking-normal text-slate-950">Create your resume</h1>
+                <p className="mt-2 max-w-2xl text-slate-600">
+                  Edit each section and watch the resume preview update instantly beside the form.
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <Button variant="outline">
+                  <Link href="/templates">Templates</Link>
+                </Button>
+                <Button>
+                  <Link href="/download">Download</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+          <div className="mb-6">
+            <ResumeStats resumeData={resumeData} />
+          </div>
+          <ResumeEditor />
+          <div className="mt-6">
+            <h2 className="mb-4 text-xl font-semibold text-slate-950">Templates</h2>
+            <TemplateGallery selectedTemplate={selectedTemplate} onSelect={setSelectedTemplate} />
+          </div>
+        </section>
+        <aside className="lg:sticky lg:top-6 lg:h-[calc(100vh-3rem)]">
+          <PDFEditor pdfData={resumeData} selectedTemplate={selectedTemplate} />
+        </aside>
+      </div>
+    </AppShell>
   );
 }

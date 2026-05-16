@@ -1,10 +1,29 @@
 import type { AppProps } from 'next/app'
 import "@/styles/globals.css"
+import { useEffect, useRef, useState } from "react"
+import { ResumeDataContext } from "@/components/resume/ResumeContext"
+import { emptyResume, TemplateId } from "@/components/resume/resume-data"
+import { loadResumeData, saveResumeData } from "@/lib/local-storage-manager"
 
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+    const [resumeData, setResumeData] = useState(emptyResume)
+    const [selectedTemplate, setSelectedTemplate] = useState<TemplateId>("modern")
+    const hydrated = useRef(false)
+
+    useEffect(() => {
+        setResumeData(loadResumeData())
+        hydrated.current = true
+    }, [])
+
+    useEffect(() => {
+        if (!hydrated.current) return
+        saveResumeData(resumeData)
+    }, [resumeData])
+
     return (
-        <Component {...pageProps} />
+        <ResumeDataContext.Provider value={{ resumeData, setResumeData, selectedTemplate, setSelectedTemplate }}>
+            <Component {...pageProps} />
+        </ResumeDataContext.Provider>
     )
 }
-

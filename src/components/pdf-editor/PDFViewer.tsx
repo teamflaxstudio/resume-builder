@@ -1,8 +1,7 @@
-import { Caveat } from "next/font/google";
 import { PDFPageProxy } from "pdfjs-dist";
-import React, { use, useEffect, useRef, useState } from "react";
-import { ArrowHeadLeft, ArrowHeadRight } from "@/components/icons";
-import "@/styles/editor/pdf-viewer.css";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function PDFViewer({
   pages,
@@ -20,7 +19,7 @@ export default function PDFViewer({
 
   const canvasSize = useRef({ width: 0, height: 0 });
 
-  function createCanvas(count: number) {
+  const createCanvas = useCallback((count: number) => {
     // remove all previous canvas
     allCanvas.current.forEach((canvas) => {
       canvasHolderElement.current!!.removeChild(canvas);
@@ -42,73 +41,15 @@ export default function PDFViewer({
     }
 
     setTotalPages(allCanvas.current.length);
-  }
-
-  useEffect(() => {
-    if (!canvasHolderElement.current) return;
-
-    if (!pages.length) {
-      // page is zero
-      createCanvas(pages.length);
-      setActivePage(0);
-      return;
-    }
-
-    var scale = 1;
-    var viewport = pages[0].getViewport({ scale: scale });
-    canvasSize.current = {
-      width: viewport.width,
-      height: viewport.height,
-    };
-    createCanvas(pages.length);
-    setActivePage(Math.min(activePage, pages.length - 1));
-
-    // render each page
-    pages.forEach((page, index) => {
-      var viewport = page.getViewport({ scale: scale });
-      var canvas = allCanvas.current[index];
-      var ctx = canvas.getContext("2d");
-
-      if (!ctx) return;
-
-      // Set canvas dimensions
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
-
-      // Render PDF page into canvas context
-      var renderContext = {
-        canvasContext: ctx,
-        viewport: viewport,
-      };
-
-      page.render(renderContext);
-    });
-
-    onResize();
-  }, [pages]);
-
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
   }, []);
 
-  useEffect(() => {
-    if (activePage < 0 || activePage >= allCanvas.current.length) return;
-
-    allCanvas.current.forEach((canvas, index) => {
-      canvas.style.display = index === activePage ? "block" : "none";
-    });
-  }, [activePage]);
-
-  function onResize() {
+  const onResize = useCallback(() => {
     if (!pagerElement.current || !canvasHolderElement.current) return;
-    // const width = canvasHolder.current.clientWidth;
+    if (!canvasSize.current.height) return;
 
-    // calculate the height and width of canvas holder
-    const height =
-      window.innerHeight - offsetTop - pagerElement.current.clientHeight;
+    const availableHeight =
+      window.innerHeight - offsetTop - pagerElement.current.clientHeight - 32;
+    const height = Math.max(360, availableHeight);
     canvasHolderElement.current.style.height = `${height}px`;
 
     const scale = height / canvasSize.current.height;
@@ -121,7 +62,65 @@ export default function PDFViewer({
       canvas.style.transformOrigin = "top left";
       canvas.style.scale = scale.toString();
     });
-  }
+  }, [offsetTop]);
+
+  useEffect(() => {
+    if (!canvasHolderElement.current) return;
+
+    if (!pages.length) {
+      // page is zero
+      createCanvas(pages.length);
+      setActivePage(0);
+      return;
+    }
+
+    const scale = 1;
+    const viewport = pages[0].getViewport({ scale: scale });
+    canvasSize.current = {
+      width: viewport.width,
+      height: viewport.height,
+    };
+    createCanvas(pages.length);
+    setActivePage(Math.min(activePage, pages.length - 1));
+
+    // render each page
+    pages.forEach((page, index) => {
+      const viewport = page.getViewport({ scale: scale });
+      const canvas = allCanvas.current[index];
+      const ctx = canvas.getContext("2d");
+
+      if (!ctx) return;
+
+      // Set canvas dimensions
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+
+      // Render PDF page into canvas context
+      const renderContext = {
+        canvasContext: ctx,
+        viewport: viewport,
+      };
+
+      page.render(renderContext);
+    });
+
+    onResize();
+  }, [activePage, createCanvas, onResize, pages]);
+
+  useEffect(() => {
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, [onResize]);
+
+  useEffect(() => {
+    if (activePage < 0 || activePage >= allCanvas.current.length) return;
+
+    allCanvas.current.forEach((canvas, index) => {
+      canvas.style.display = index === activePage ? "block" : "none";
+    });
+  }, [activePage]);
 
   function changePage(page: 1 | -1) {
     setActivePage((prev) => {
@@ -134,26 +133,25 @@ export default function PDFViewer({
   }
 
   return (
-    <div className="pdf-viewer">
+    <div className="flex h-full flex-col items-center justify-center px-4 py-5">
       <div
-        className="canvas-holder"
+        className="overflow-hidden rounded-md bg-white shadow-2xl ring-1 ring-white/10"
         ref={canvasHolderElement}
       >
-        {/* <canvas className="scale-50"></canvas> */}
       </div>
       <div
         ref={pagerElement}
-        className="pager"
+        className="mt-4 flex h-11 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/10 px-2 text-white backdrop-blur"
       >
-        <button className="btn icon-btn plain" onClick={() => changePage(-1)}>
-          <ArrowHeadLeft/>
-        </button>
-        <span className="block text-white">
+        <Button type="button" variant="ghost" size="icon" className="h-8 w-8 rounded-full text-white hover:bg-white/15 hover:text-white" onClick={() => changePage(-1)}>
+          <ChevronLeft className="h-4 w-4" />
+        </Button>
+        <span className="min-w-12 text-center text-sm font-medium text-white">
           {activePage + 1}/{totalPages}
         </span>
-        <button className="btn icon-btn plain" onClick={() => changePage(1)}>
-          <ArrowHeadRight />
-        </button>
+        <Button type="button" variant="ghost" size="icon" className="h-8 w-8 rounded-full text-white hover:bg-white/15 hover:text-white" onClick={() => changePage(1)}>
+          <ChevronRight className="h-4 w-4" />
+        </Button>
       </div>
     </div>
   );

@@ -40,6 +40,10 @@ const skills = [
   "JSTL",
 ];
 
+export function cn(...inputs: Array<string | false | null | undefined>) {
+  return inputs.filter(Boolean).join(" ");
+}
+
 export function getRandomSkills(count: number) {
   const result: string[] = [];
   while (result.length < count) {
