@@ -1,6 +1,6 @@
 import { ResumeProfile } from "@/components/pdf-editor/pdf-handler";
 
-export type TemplateId = "modern" | "classic" | "minimal" | "executive";
+export type TemplateId = "modern" | "classic" | "minimal" | "executive" | "compact" | "creative" | "technical" | "academic";
 
 export const emptyResume: ResumeProfile = {
   jobTitle: "",
@@ -60,6 +60,34 @@ export const templates: Array<{
     description: "Premium header treatment for senior leadership applications.",
     accent: "#1d4ed8",
     bestFor: "Management and leadership",
+  },
+  {
+    id: "compact",
+    name: "Compact",
+    description: "Dense single-page structure with tight spacing and efficient section grouping.",
+    accent: "#475569",
+    bestFor: "Experienced candidates",
+  },
+  {
+    id: "creative",
+    name: "Creative",
+    description: "Bold accent rail and editorial hierarchy for memorable applications.",
+    accent: "#be123c",
+    bestFor: "Design and marketing",
+  },
+  {
+    id: "technical",
+    name: "Technical",
+    description: "Skills-first layout that highlights tools, projects, and delivery impact.",
+    accent: "#0f766e",
+    bestFor: "Software and engineering",
+  },
+  {
+    id: "academic",
+    name: "Academic",
+    description: "Formal publication-inspired layout with education and credentials up front.",
+    accent: "#4f46e5",
+    bestFor: "Research and education",
   },
 ];
 
